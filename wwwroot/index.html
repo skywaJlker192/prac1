@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live-центр мониторинга</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Live-центр мониторинга</h1>
+    <div class="header-info">
+        <span>Статус: <b id="status" class="status connecting">Подключение…</b></span>
+        <span>Онлайн: <b id="onlineCount">0</b></span>
+        <span>Мой ID: <code id="myId">—</code></span>
+    </div>
+</header>
+
+<main>
+    <section class="card">
+        <h2>Общий чат</h2>
+        <div class="row">
+            <input id="messageInput" type="text" placeholder="Сообщение всем">
+            <button id="sendBtn">Отправить</button>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Комнаты</h2>
+        <div class="row">
+            <input id="roomInput" type="text" placeholder="Название комнаты, например alpha">
+            <button id="joinBtn">Войти</button>
+            <button id="leaveBtn" class="secondary">Выйти</button>
+        </div>
+        <p class="hint">Текущая комната: <b id="currentRoom">нет</b></p>
+        <div class="row">
+            <input id="roomMessageInput" type="text" placeholder="Сообщение в комнату">
+            <button id="sendRoomBtn">Отправить в комнату</button>
+        </div>
+        <div id="typing" class="typing"></div>
+    </section>
+
+    <section class="card">
+        <h2>Приватные сообщения</h2>
+        <div class="row">
+            <input id="toInput" type="text" placeholder="Кому (ID подключения)">
+        </div>
+        <div class="row">
+            <input id="privateInput" type="text" placeholder="Текст приватного сообщения">
+            <button id="sendPrivateBtn">Отправить приватно</button>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Внешние уведомления (HTTP POST)</h2>
+        <div class="row">
+            <button id="systemBtn" class="secondary">Системное сообщение всем</button>
+            <button id="externalRoomBtn" class="secondary">Внешнее уведомление в комнату</button>
+        </div>
+        <p class="hint">Для уведомления в комнату используется название из поля «Комнаты».</p>
+    </section>
+
+    <section class="card">
+        <h2>Пользователи онлайн</h2>
+        <table>
+            <thead>
+            <tr><th>ID подключения</th><th>Комната</th></tr>
+            </thead>
+            <tbody id="usersBody"></tbody>
+        </table>
+        <p class="hint">Нажми на пользователя, чтобы подставить его ID в поле «Кому».</p>
+    </section>
+
+    <section class="card">
+        <h2>Поток случайных чисел</h2>
+        <div class="row">
+            <input id="streamMax" type="number" min="1" value="100" title="Максимальное значение">
+            <button id="streamStartBtn">Старт</button>
+            <button id="streamStopBtn" class="secondary">Стоп</button>
+        </div>
+        <canvas id="chart" width="600" height="160"></canvas>
+        <div id="streamList" class="stream-list"></div>
+    </section>
+
+    <section class="card wide">
+        <h2>Лента событий</h2>
+        <div id="feed" class="feed"></div>
+    </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
